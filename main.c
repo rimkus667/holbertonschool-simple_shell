@@ -25,12 +25,12 @@ int main(void)
 			exit(0);
 		}
 		line[strcspn(line, "\n")] = '\0';
-
 		pid = fork();
 		if (pid == 0)
 		{
 			argv[0] = line;
 			argv[1] = NULL;
+
 			execve(argv[0], argv, environ);
 			perror("./shell");
 			exit(1);
