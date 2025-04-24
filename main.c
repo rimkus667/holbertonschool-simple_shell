@@ -24,7 +24,6 @@ int main(void)
 			free(line);
 			exit(0);
 		}
-
 		line[strcspn(line, "\n")] = '\0';
 
 		pid = fork();
@@ -32,7 +31,6 @@ int main(void)
 		{
 			argv[0] = line;
 			argv[1] = NULL;
-
 			execve(argv[0], argv, environ);
 			perror("./shell");
 			exit(1);
@@ -46,7 +44,6 @@ int main(void)
 			perror("fork");
 		}
 	}
-
 	free(line);
 	return (0);
 }
