@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * main - Minimal shell for Task 0.1
+ * main - Minimal shell with soft exit support
  *
  * Return: 0 on success
  */
@@ -24,7 +24,15 @@ int main(void)
 			free(line);
 			exit(0);
 		}
+
 		line[strcspn(line, "\n")] = '\0';
+
+		if (strcmp(line, "exit") == 0)
+		{
+			free(line);
+			exit(0);
+		}
+
 		pid = fork();
 		if (pid == 0)
 		{
@@ -44,6 +52,8 @@ int main(void)
 			perror("fork");
 		}
 	}
+
 	free(line);
 	return (0);
 }
+
