@@ -17,14 +17,12 @@ int main(void)
 	{
 		if (interactive)
 			printf("#cisfun$ ");
-
 		read = getline(&line, &len, stdin);
 		if (read == -1)
 		{
 			free(line);
 			exit(0);
 		}
-
 		line[strcspn(line, "\n")] = '\0';
 
 		if (strcmp(line, "exit") == 0)
@@ -32,28 +30,19 @@ int main(void)
 			free(line);
 			exit(0);
 		}
-
 		pid = fork();
 		if (pid == 0)
 		{
 			argv[0] = line;
 			argv[1] = NULL;
-
 			execve(argv[0], argv, environ);
 			perror("./shell");
 			exit(1);
 		}
 		else if (pid > 0)
-		{
 			wait(NULL);
-		}
 		else
-		{
 			perror("fork");
-		}
 	}
-
-	free(line);
 	return (0);
 }
-
